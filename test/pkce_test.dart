@@ -18,16 +18,9 @@ void main() {
       });
     });
 
-    group('stripTrailingPadding', () {
-      test('doesn\'t strip when false', () {
-        final pkcePair = PkcePair.generate();
-        expect(pkcePair.codeChallenge, endsWith('='));
-      });
-
-      test('does strip when true', () {
-        final pkcePair = PkcePair.generate(stripTrailingPadding: true);
-        expect(pkcePair.codeChallenge, isNot(endsWith('=')));
-      });
+    test('strips padding', () {
+      final pkcePair = PkcePair.generate();
+      expect(pkcePair.codeChallenge, isNot(endsWith('=')));
     });
   });
 }
