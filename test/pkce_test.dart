@@ -4,9 +4,19 @@ import 'package:test/test.dart';
 void main() {
   group(PkcePair, () {
     group('length', () {
-      test('is set when in range', () {
+      test('is correct for min length', () {
+        final pkcePair = PkcePair.generate(length: 32);
+        expect(pkcePair.codeVerifier, hasLength(44));
+      });
+
+      test('is correct for max length', () {
+        final pkcePair = PkcePair.generate(length: 96);
+        expect(pkcePair.codeVerifier, hasLength(128));
+      });
+
+      test('is correct for arbitrary length', () {
         final pkcePair = PkcePair.generate(length: 69);
-        expect(pkcePair.codeVerifier, hasLength(69));
+        expect(pkcePair.codeVerifier, hasLength(92));
       });
 
       test('throws an exception when too short', () {

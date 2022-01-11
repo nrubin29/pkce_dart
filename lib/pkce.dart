@@ -8,9 +8,6 @@ import 'package:crypto/crypto.dart';
 /// A pair of ([codeVerifier], [codeChallenge]) that can be used with PKCE
 /// (Proof Key for Code Exchange).
 class PkcePair {
-  static const _alphabet =
-      'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~';
-
   /// The code verifier.
   final String codeVerifier;
 
@@ -22,17 +19,18 @@ class PkcePair {
 
   /// Generates a [PkcePair].
   ///
-  /// [length] is the length of the [codeVerifier] and must be between 43 and
-  /// 128 inclusive.
-  factory PkcePair.generate({int length = 128}) {
-    if (length < 43 || length > 128) {
+  /// [length] is the length used to generate the [codeVerifier]. It must be
+  /// between 32 and 96, inclusive, which corresponds to a [codeVerifier] of
+  /// length between 44 and 128, inclusive. The spec recommends a length of 32.
+  factory PkcePair.generate({int length = 32}) {
+    if (length < 32 || length > 96) {
       throw ArgumentError.value(
-          length, 'length', 'The length must be between 43 and 128 inclusive.');
+          length, 'length', 'The length must be between 32 and 96, inclusive.');
     }
 
     final random = Random.secure();
-    final verifier = List.generate(
-        length, (index) => _alphabet[random.nextInt(_alphabet.length)]).join();
+    final verifier =
+        base64UrlEncode(List.generate(length, (_) => random.nextInt(256)));
     final challenge =
         base64UrlEncode(sha256.convert(ascii.encode(verifier)).bytes)
             .split('=')[0];
