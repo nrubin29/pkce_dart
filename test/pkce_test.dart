@@ -6,7 +6,7 @@ void main() {
     group('length', () {
       test('is correct for min length', () {
         final pkcePair = PkcePair.generate(length: 32);
-        expect(pkcePair.codeVerifier, hasLength(44));
+        expect(pkcePair.codeVerifier, hasLength(43));
       });
 
       test('is correct for max length', () {

@@ -1,6 +1,6 @@
 name: pkce
 description: Generates code verifier and code challenge pairs for PKCE (Proof Key for Code Exchange).
-version: 1.1.0
+version: 1.1.0+1
 homepage: https://github.com/nrubin29/pkce_dart
 
 environment:

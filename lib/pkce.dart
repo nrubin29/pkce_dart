@@ -21,7 +21,7 @@ class PkcePair {
   ///
   /// [length] is the length used to generate the [codeVerifier]. It must be
   /// between 32 and 96, inclusive, which corresponds to a [codeVerifier] of
-  /// length between 44 and 128, inclusive. The spec recommends a length of 32.
+  /// length between 43 and 128, inclusive. The spec recommends a length of 32.
   factory PkcePair.generate({int length = 32}) {
     if (length < 32 || length > 96) {
       throw ArgumentError.value(
