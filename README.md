@@ -1,6 +1,6 @@
 # pkce_dart
 
-A library for generating code verifier and code challenge pairs for PKCE (Proof Key for Code Exchange).
+A library for generating code verifier and code challenge pairs for [PKCE (Proof Key for Code Exchange)](https://datatracker.ietf.org/doc/html/rfc7636).
 
 ## Usage
 
