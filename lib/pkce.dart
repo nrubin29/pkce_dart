@@ -30,7 +30,8 @@ class PkcePair {
 
     final random = Random.secure();
     final verifier =
-        base64UrlEncode(List.generate(length, (_) => random.nextInt(256)));
+        base64UrlEncode(List.generate(length, (_) => random.nextInt(256)))
+            .split('=')[0];
     final challenge =
         base64UrlEncode(sha256.convert(ascii.encode(verifier)).bytes)
             .split('=')[0];
